@@ -1,38 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --left-bg-color: rgba(87, 84, 236, 0.7);
+  --right-bg-color: rgba(43, 43, 43, 0.8);
+  --left-btn-hover-color: rgba(87, 84, 236, 1);
+  --right-btn-hover-color: rgba(28, 122, 28, 1);
+  --hover-width: 75%;
+  --other-width: 25%;
+  --speed: 900ms;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+h1 {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4rem;
+  color: #fff;
+  white-space: nowrap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #333;
+}
+
+.btn {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  width: 15rem;
+  padding: 1.5rem;
+  border: 3.2px solid #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.split {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  &.left {
+    left: 0;
+    background: url('./img/ps.jpg') no-repeat center center/cover;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--left-bg-color);
+    }
+    .btn {
+      &:hover {
+        background: var(--left-btn-hover-color);
+        border-color: var(--left-btn-hover-color);
+      }
+    }
   }
-  to {
-    transform: rotate(360deg);
+  &.right {
+    right: 0;
+    background: url('./img/xbox.jpg') no-repeat center left/ cover;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--right-bg-color);
+    }
+    .btn {
+      &:hover {
+        background: var(--right-btn-hover-color);
+        border-color: var(--right-btn-hover-color);
+      }
+    }
+  }
+  &.right,
+  &.left,
+  &.right::before,
+  &.left::before {
+    transition: all var(--speed) ease-in-out;
+  }
+}
+
+.hover-left {
+  .left {
+    width: var(--hover-width);
+  }
+  .right {
+    width: var(--other-width);
+  }
+}
+
+.hover-right {
+  .right {
+    width: var(--hover-width);
+  }
+  .left {
+    width: var(--other-width);
+  }
+}
+
+@media (max-width: 800px) {
+  h1 {
+    top: 30%;
+    font-size: 2rem;
+  }
+  .btn {
+    padding: 1.2rem;
+    width: 12rem;
   }
 }
